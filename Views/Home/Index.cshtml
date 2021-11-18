@@ -1,8 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var films = ViewData["Films"] as List<FilmModel>;
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div class="text-center">
+    <table>
+        @foreach(FilmModel item in films)
+            {
+                <tr><td>@item.ID</td><td>@item.Title</td><td>@item.Year</td></tr>
+            }
+    </table>
 </div>

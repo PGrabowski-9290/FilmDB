@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>Strona Główna - FilmController</h2>
+
+@{
+    FilmModel film = new FilmModel();
+    film.ID = 1; film.Title = "Film 1"; film.Year = 2021;
+
+    FilmManager FilmManager = new FilmManager();
+    FilmManager.AddFilm(film);
+
+    FilmManager.ChangeTitle(1, null);
+}
+
