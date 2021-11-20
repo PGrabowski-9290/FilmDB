@@ -43,9 +43,16 @@ namespace FilmDB.Controllers
         public IActionResult RemoveConfirm(int id)
         {
             var manager = new FilmManager();
-            var film = manager.GetFilm(id);
-            manager.RemoveFilm(id);
-            return RedirectToAction("Index");
+            try
+            {
+                manager.RemoveFilm(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                
+                return BadRequest();
+            }
         }
 
         [HttpGet]
