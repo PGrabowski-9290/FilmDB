@@ -1,0 +1,13 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var film = ViewData["Film"] as FilmModel;
+}
+<div class="Danger-zone">
+    <h2>Czy chcesz usunąć film:</h2>
+    <p>@film.Title @film.Year <br />
+    <a asp-controller="Home" asp-action="RemoveConfirm" class="button button-danger">Potwierdź Usunięcie</a><br />
+    <a asp-controller="Home" asp-action="Index">Powrot</a>
+    </p>
+</div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FilmDB.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,59 @@ namespace FilmDB.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            FilmManager filmManager = new FilmManager();
+            List<FilmModel> films = filmManager.GetFilms();
+
+            return View(films);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
+
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(FilmModel film)
+        {
+            FilmManager filmManager = new FilmManager();
+            filmManager.AddFilm(film);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(int id)
+        {
+            var manager = new FilmManager();
+            var film = manager.GetFilm(id);
+            return View(film);
+        }
+
+        public IActionResult RemoveConfirm(int id)
+        {
+            var manager = new FilmManager();
+            var film = manager.GetFilm(id);
+            manager.RemoveFilm(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var manager = new FilmManager();
+            var film = manager.GetFilm(id);
+
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(FilmModel film)
+        {
+            var manager = new FilmManager();
+            manager.UpdateFilm(film);
+
+            return View(film);
         }
     }
 }

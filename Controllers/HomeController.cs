@@ -21,9 +21,6 @@ namespace FilmDB.Controllers
 
         public IActionResult Index()
         {
-            FilmManager filmManager = new FilmManager();
-            List<FilmModel> films = filmManager.GetFilms();
-            ViewData["films"] = films;
             return View();
         }
 
@@ -31,11 +28,7 @@ namespace FilmDB.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Add(FilmModel filmModel)
-        {
-            return View();
-        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

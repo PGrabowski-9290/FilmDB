@@ -13,9 +13,9 @@ namespace FilmDB
         {
             using(FilmContext context = new FilmContext())
             {
+                context.Films.Add(filmModel);
                 try
-                {
-                    context.Films.Add(filmModel);
+                {                    
                     context.SaveChanges();
                 }
                 catch (Exception)
@@ -34,7 +34,7 @@ namespace FilmDB
             {
                 try
                 {
-                    var delFilm = context.Films.Where(f => f.ID == id).SingleOrDefault();
+                    var delFilm = context.Films.SingleOrDefault(f => f.ID == id);
                     _ = context.Films.Remove(delFilm);
                     context.SaveChanges();
                 }
@@ -69,18 +69,17 @@ namespace FilmDB
             {
                 try
                 {
-                    var updatedFilmModel = context.Films.Where(f => f.ID == id).SingleOrDefault();
+                    var updatedFilm = context.Films.Where(f => f.ID == id).SingleOrDefault();
                     if (newTitle != null)
                     {
-                        updatedFilmModel.Title = newTitle;
+                        updatedFilm.Title = newTitle;
                     }
                     else
                     {
-                        updatedFilmModel.Title = "Brak Tytułu";
+                        updatedFilm.Title = "Brak Tytułu";
                     }
 
-                    context.Update(updatedFilmModel);
-                    context.SaveChanges();
+                    this.UpdateFilm(updatedFilm);
                 }
                 catch (Exception)
                 {
